@@ -99,7 +99,6 @@ export default function WalletConnect({ fullWidth = false, size = 'md' }) {
               {copiedAddress ? 'Copied!' : formatAddress(address)}
             </span>
             {copiedAddress && <span className="copy-check">✓</span>}
-            }
             
           </button>
 
