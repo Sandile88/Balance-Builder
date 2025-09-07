@@ -67,6 +67,25 @@ html, body {
   pointer-events: auto;
 }
 
+/* Desktop/Mobile visibility */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-only {
+    display: block;
+  }
+}
+
 /* Score section */
 .score-section {
   top: 20px;
@@ -188,6 +207,227 @@ html, body {
   background: #4B5563;
 }
 
+/* Mobile Hamburger Menu */
+.mobile-menu-section {
+  top: 20px;
+  right: 20px;
+  z-index: 50;
+}
+
+.hamburger-button {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
+.hamburger-button:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.hamburger {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: 0.3s ease-in-out;
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.hamburger span:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger span:nth-child(2) {
+  top: 7px;
+}
+
+.hamburger span:nth-child(3) {
+  top: 14px;
+}
+
+.hamburger.active span:nth-child(1) {
+  top: 7px;
+  transform: rotate(135deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.hamburger.active span:nth-child(3) {
+  top: 7px;
+  transform: rotate(-135deg);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.mobile-menu-content {
+  background: rgba(0, 0, 0, 0.95);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 350px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-header h3 {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.close-menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.close-menu-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-items {
+  padding: 20px;
+}
+
+.menu-section {
+  margin-bottom: 30px;
+}
+
+.menu-section:last-child {
+  margin-bottom: 0;
+}
+
+.menu-section h4 {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+.menu-item-button {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.menu-item-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.menu-item-button.primary {
+  background: linear-gradient(45deg, #3B82F6, #2563EB);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.menu-item-button.primary:hover {
+  background: linear-gradient(45deg, #2563EB, #1D4ED8);
+}
+
+.menu-item-button.secondary {
+  background: rgba(239, 68, 68, 0.8);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.menu-item-button.secondary:hover {
+  background: rgba(220, 38, 38, 0.9);
+}
+
+.menu-setting-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-setting-item:last-child {
+  border-bottom: none;
+}
+
+.menu-setting-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #3B82F6;
+  cursor: pointer;
+}
+
+.wallet-connect-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* Settings panel */
 .settings-panel {
   position: absolute;
@@ -227,23 +467,41 @@ html, body {
 /* Mobile controls */
 .mobile-controls {
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 20px;
+  flex-direction: column;
   align-items: center;
+  gap: 15px;
   z-index: 20;
 }
 
+.swipe-instructions {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 8px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
 .mobile-control-button {
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(45deg, #3B82F6, #2563EB);
   color: white;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   backdrop-filter: blur(10px);
@@ -253,26 +511,15 @@ html, body {
   justify-content: center;
   touch-action: manipulation;
   user-select: none;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .mobile-control-button:active {
   transform: scale(0.95);
-  background: rgba(0, 0, 0, 0.9);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-.mobile-control-button.drop {
-  width: 90px;
-  height: 90px;
-  background: #3B82F6;
-  font-size: 16px;
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.mobile-control-button.drop:active {
-  background: #2563EB;
+  background: linear-gradient(45deg, #2563EB, #1D4ED8);
   border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
 }
 
 /* Menu overlays */
@@ -643,18 +890,17 @@ kbd {
   
   .mobile-controls {
     bottom: 30px;
-    gap: 15px;
+    gap: 12px;
+  }
+  
+  .swipe-instructions {
+    font-size: 12px;
+    padding: 6px 12px;
   }
   
   .mobile-control-button {
-    width: 65px;
-    height: 65px;
-    font-size: 20px;
-  }
-  
-  .mobile-control-button.drop {
-    width: 85px;
-    height: 85px;
+    width: 80px;
+    height: 80px;
     font-size: 14px;
   }
   
@@ -688,18 +934,17 @@ kbd {
 @media (max-height: 700px) {
   .mobile-controls {
     bottom: 15px;
-    gap: 12px;
+    gap: 10px;
+  }
+  
+  .swipe-instructions {
+    font-size: 11px;
+    padding: 5px 10px;
   }
   
   .mobile-control-button {
-    width: 55px;
-    height: 55px;
-    font-size: 18px;
-  }
-  
-  .mobile-control-button.drop {
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
     font-size: 12px;
   }
   
@@ -745,19 +990,18 @@ kbd {
   
   .mobile-controls {
     bottom: 20px;
-    gap: 10px;
+    gap: 8px;
+  }
+  
+  .swipe-instructions {
+    font-size: 10px;
+    padding: 4px 8px;
   }
   
   .mobile-control-button {
-    width: 60px;
-    height: 60px;
-    font-size: 18px;
-  }
-  
-  .mobile-control-button.drop {
-    width: 80px;
-    height: 80px;
-    font-size: 13px;
+    width: 75px;
+    height: 75px;
+    font-size: 14px;
   }
 }
 
