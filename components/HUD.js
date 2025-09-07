@@ -30,13 +30,6 @@ export default function HUD({
 
   return (
     <div className="hud-container">
-      {/* Wallet Connect in HUD */}
-      {isConnected && (
-        <div className="hud-section wallet-section">
-          <WalletConnect />
-        </div>
-      )}
-      
       {/* Score Display */}
       <div className="hud-section score-section">
         <div className="score-display">
@@ -69,6 +62,24 @@ export default function HUD({
 
       {/* Game Controls */}
       <div className="hud-section controls-section">
+        {/* Settings and Sound buttons */}
+        <button 
+          onClick={() => setShowSettings(!showSettings)} 
+          className="hud-button"
+          aria-label="Settings"
+        >
+          ⚙️
+        </button>
+
+        <button 
+          onClick={() => toggleSetting('soundEnabled')} 
+          className="hud-button"
+          aria-label={settings.soundEnabled ? "Mute" : "Unmute"}
+        >
+          {settings.soundEnabled ? '🔊' : '🔇'}
+        </button>
+        
+        {/* Game control buttons */}
         {gameState === 'menu' && (
           <button onClick={onStart} className="hud-button primary">
             Start
@@ -92,23 +103,14 @@ export default function HUD({
             Restart
           </button>
         )}
-
-        <button 
-          onClick={() => setShowSettings(!showSettings)} 
-          className="hud-button"
-          aria-label="Settings"
-        >
-          ⚙️
-        </button>
-
-        <button 
-          onClick={() => toggleSetting('soundEnabled')} 
-          className="hud-button"
-          aria-label={settings.soundEnabled ? "Mute" : "Unmute"}
-        >
-          {settings.soundEnabled ? '🔊' : '🔇'}
-        </button>
       </div>
+      
+      {/* Wallet Connect in HUD - positioned after controls */}
+      {isConnected && (
+        <div className="hud-section wallet-section">
+          <WalletConnect />
+        </div>
+      )}
 
       {/* Settings Panel */}
       {showSettings && (
@@ -147,14 +149,22 @@ export default function HUD({
       {/* Mobile Controls */}
       {(isPlaying || isPaused) && (
         <div className="mobile-controls">
+          {/* Left Arrow */}
           <button 
             className="mobile-control-button left"
             onTouchStart={(e) => {
               e.preventDefault()
+              e.stopPropagation()
               window.game?.handleTouch('left', true)
             }}
             onTouchEnd={(e) => {
               e.preventDefault()
+              e.stopPropagation()
+              window.game?.handleTouch('left', false)
+            }}
+            onTouchCancel={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
               window.game?.handleTouch('left', false)
             }}
             onMouseDown={() => window.game?.handleTouch('left', true)}
@@ -164,29 +174,44 @@ export default function HUD({
             ←
           </button>
           
+          {/* Drop Button */}
           <button 
             className="mobile-control-button drop"
             onTouchStart={(e) => {
               e.preventDefault()
+              e.stopPropagation()
               window.game?.handleTouch('drop', true)
             }}
             onTouchEnd={(e) => {
               e.preventDefault()
+              e.stopPropagation()
               window.game?.handleTouch('drop', false)
             }}
-            onClick={() => window.game?.handleTouch('drop', true)}
+            onTouchCancel={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              window.game?.handleTouch('drop', false)
+            }}
           >
             DROP
           </button>
           
+          {/* Right Arrow */}
           <button 
             className="mobile-control-button right"
             onTouchStart={(e) => {
               e.preventDefault()
+              e.stopPropagation()
               window.game?.handleTouch('right', true)
             }}
             onTouchEnd={(e) => {
               e.preventDefault()
+              e.stopPropagation()
+              window.game?.handleTouch('right', false)
+            }}
+            onTouchCancel={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
               window.game?.handleTouch('right', false)
             }}
             onMouseDown={() => window.game?.handleTouch('right', true)}
