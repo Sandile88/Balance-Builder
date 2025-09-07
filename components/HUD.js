@@ -26,16 +26,18 @@ export default function HUD({
   }
 
   const handleHamburgerClick = () => {
-    if (gameState === 'playing') {
-      onPause() // Pause the game
+    // Force pause the game when opening menu
+    if (gameState === 'playing' && window.game) {
+      window.game.forcePause()
     }
     setShowPauseModal(true)
   }
 
   const handleResumeGame = () => {
     setShowPauseModal(false)
-    if (gameState === 'paused') {
-      onPause() // Resume the game
+    // Force resume the game
+    if (window.game) {
+      window.game.forceResume()
     }
   }
 
@@ -79,7 +81,22 @@ export default function HUD({
         </div>
       </div>
 
-      {/* Desktop Controls */}
+      {/* Hamburger Menu */}
+      <div className="hud-section mobile-menu-section mobile-only">
+        <button 
+          onClick={handleHamburgerClick}
+          className="hamburger-button"
+          aria-label="Menu"
+        >
+          <div className="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+
+      {/* Desktop Controls - Only show on desktop */}
       <div className="hud-section controls-section desktop-only">
         <button 
           onClick={() => setShowSettings(!showSettings)} 
@@ -126,21 +143,6 @@ export default function HUD({
             <WalletConnect />
           </div>
         )}
-      </div>
-
-      {/* Mobile Hamburger Menu */}
-      <div className="hud-section mobile-menu-section mobile-only">
-        <button 
-          onClick={handleHamburgerClick}
-          className="hamburger-button"
-          aria-label="Menu"
-        >
-          <div className="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
       </div>
 
       {/* Pause Modal */}
@@ -214,14 +216,12 @@ export default function HUD({
               </div>
 
               {/* Wallet */}
-              {isConnected && (
-                <div className="menu-section">
-                  <h4>Wallet</h4>
-                  <div className="wallet-connect-modal">
-                    <WalletConnect />
-                  </div>
+              <div className="menu-section">
+                <h4>Wallet</h4>
+                <div className="wallet-connect-modal">
+                  <WalletConnect />
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
