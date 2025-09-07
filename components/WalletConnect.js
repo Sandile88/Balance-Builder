@@ -85,7 +85,7 @@ export default function WalletConnect({ fullWidth = false, size = 'md' }) {
   const sizeClass = size === 'lg' ? 'h-12 px-6 text-base' : 'px-6 py-2';
 
   return (
-    <div className="wallet-connect-container">
+    <div className={`wallet-connect-container ${fullWidth ? 'full-width' : ''}`}>
       {isConnected ? (
         <div className="wallet-connected">
            {/* Clickable Address Display */}

@@ -463,6 +463,43 @@ html, body {
   gap: 10px;
 }
 
+.wallet-modal-container {
+  width: 100%;
+}
+
+.wallet-modal-container .wallet-connect-container {
+  width: 100%;
+  justify-content: center;
+}
+
+.wallet-modal-container .wallet-connected {
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.wallet-modal-container .wallet-address-button {
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.wallet-modal-container .wallet-disconnect-button {
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.wallet-modal-container .wallet-connect-button {
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+  font-size: 14px;
+}
+
 /* Settings panel */
 .settings-panel {
   position: absolute;
@@ -1052,6 +1089,10 @@ kbd {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.wallet-connect-container.full-width {
+  width: 100%;
 }
 
 .wallet-connected {

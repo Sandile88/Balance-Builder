@@ -218,8 +218,8 @@ export default function HUD({
               {/* Wallet */}
               <div className="menu-section">
                 <h4>Wallet</h4>
-                <div className="wallet-connect-modal">
-                  <WalletConnect />
+                <div className="wallet-modal-container">
+                  <WalletConnect fullWidth={true} size="md" />
                 </div>
               </div>
             </div>
