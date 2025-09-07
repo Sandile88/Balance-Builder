@@ -7,8 +7,8 @@ export const metadata = {
 
 export default function HowTo() {
   return (
-    <main className="how-to-container">
-      <div className="how-to-content">
+    <div className="how-to-container">
+      <main className="how-to-content">
         <Link href="/" className="back-link">← Back to Game</Link>
         
         <h1>How to Play Balance Builder</h1>
@@ -99,7 +99,7 @@ export default function HowTo() {
         <div className="start-playing">
           <Link href="/" className="start-button">Start Playing!</Link>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }
