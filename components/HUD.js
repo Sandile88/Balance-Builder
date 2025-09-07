@@ -16,7 +16,7 @@ export default function HUD({
 }) {
   const { isConnected } = useAccount()
   const [showSettings, setShowSettings] = useState(false)
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [showPauseModal, setShowPauseModal] = useState(false)
 
   const toggleSetting = (key) => {
     onSettingsChange({
@@ -25,6 +25,24 @@ export default function HUD({
     })
   }
 
+  const handleHamburgerClick = () => {
+    if (gameState === 'playing') {
+      onPause() // Pause the game
+    }
+    setShowPauseModal(true)
+  }
+
+  const handleResumeGame = () => {
+    setShowPauseModal(false)
+    if (gameState === 'paused') {
+      onPause() // Resume the game
+    }
+  }
+
+  const handleRestartFromModal = () => {
+    setShowPauseModal(false)
+    onRestart()
+  }
   const isPlaying = gameState === 'playing'
   const isPaused = gameState === 'paused'
   const comboPercentage = Math.min((combo / 10) * 100, 100)
@@ -113,11 +131,11 @@ export default function HUD({
       {/* Mobile Hamburger Menu */}
       <div className="hud-section mobile-menu-section mobile-only">
         <button 
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
+          onClick={handleHamburgerClick}
           className="hamburger-button"
           aria-label="Menu"
         >
-          <div className={`hamburger ${showMobileMenu ? 'active' : ''}`}>
+          <div className="hamburger">
             <span></span>
             <span></span>
             <span></span>
@@ -125,46 +143,40 @@ export default function HUD({
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      {showMobileMenu && (
-        <div className="mobile-menu-overlay" onClick={() => setShowMobileMenu(false)}>
-          <div className="mobile-menu-content" onClick={(e) => e.stopPropagation()}>
-            <div className="mobile-menu-header">
-              <h3>Game Menu</h3>
+      {/* Pause Modal */}
+      {showPauseModal && (
+        <div className="pause-modal-overlay" onClick={() => setShowPauseModal(false)}>
+          <div className="pause-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="pause-modal-header">
+              <h3>Game Paused</h3>
               <button 
-                onClick={() => setShowMobileMenu(false)}
+                onClick={() => setShowPauseModal(false)}
                 className="close-menu-button"
               >
                 ✕
               </button>
             </div>
             
-            <div className="mobile-menu-items">
+            <div className="pause-modal-items">
               {/* Game Controls */}
               <div className="menu-section">
                 <h4>Game Controls</h4>
                 
-                {gameState === 'menu' && (
-                  <button onClick={() => { onStart(); setShowMobileMenu(false); }} className="menu-item-button primary">
-                    🎮 Start Game
-                  </button>
-                )}
-                
-                {isPlaying && (
-                  <button onClick={() => { onPause(); setShowMobileMenu(false); }} className="menu-item-button">
-                    ⏸️ Pause Game
-                  </button>
-                )}
-                
-                {isPaused && (
-                  <button onClick={() => { onPause(); setShowMobileMenu(false); }} className="menu-item-button primary">
+                {(isPlaying || isPaused) && (
+                  <button onClick={handleResumeGame} className="menu-item-button primary">
                     ▶️ Resume Game
                   </button>
                 )}
                 
                 {(isPlaying || isPaused) && (
-                  <button onClick={() => { onRestart(); setShowMobileMenu(false); }} className="menu-item-button secondary">
+                  <button onClick={handleRestartFromModal} className="menu-item-button secondary">
                     🔄 Restart Game
+                  </button>
+                )}
+
+                {gameState === 'menu' && (
+                  <button onClick={() => { onStart(); setShowPauseModal(false); }} className="menu-item-button primary">
+                    🎮 Start Game
                   </button>
                 )}
               </div>
@@ -205,7 +217,7 @@ export default function HUD({
               {isConnected && (
                 <div className="menu-section">
                   <h4>Wallet</h4>
-                  <div className="wallet-connect-mobile">
+                  <div className="wallet-connect-modal">
                     <WalletConnect />
                   </div>
                 </div>

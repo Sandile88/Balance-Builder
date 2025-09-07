@@ -280,8 +280,8 @@ html, body {
   transform: rotate(-135deg);
 }
 
-/* Mobile Menu Overlay */
-.mobile-menu-overlay {
+/* Pause Modal Overlay */
+.pause-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -294,9 +294,15 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  animation: fadeIn 0.2s ease-out;
 }
 
-.mobile-menu-content {
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pause-modal-content {
   background: rgba(0, 0, 0, 0.95);
   border-radius: 16px;
   padding: 0;
@@ -307,9 +313,21 @@ html, body {
   -webkit-overflow-scrolling: touch;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideIn 0.3s ease-out;
 }
 
-.mobile-menu-header {
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.pause-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -317,7 +335,7 @@ html, body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.mobile-menu-header h3 {
+.pause-modal-header h3 {
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -339,7 +357,7 @@ html, body {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.mobile-menu-items {
+.pause-modal-items {
   padding: 20px;
 }
 
@@ -375,29 +393,40 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  touch-action: manipulation;
 }
 
 .menu-item-button:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.menu-item-button:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .menu-item-button.primary {
   background: linear-gradient(45deg, #3B82F6, #2563EB);
   border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .menu-item-button.primary:hover {
   background: linear-gradient(45deg, #2563EB, #1D4ED8);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
 .menu-item-button.secondary {
   background: rgba(239, 68, 68, 0.8);
   border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 .menu-item-button.secondary:hover {
   background: rgba(220, 38, 38, 0.9);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
 }
 
 .menu-setting-item {
@@ -409,10 +438,16 @@ html, body {
   font-size: 16px;
   cursor: pointer;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
 }
 
 .menu-setting-item:last-child {
   border-bottom: none;
+}
+
+.menu-setting-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  padding-left: 16px;
 }
 
 .menu-setting-item input[type="checkbox"] {
@@ -422,7 +457,7 @@ html, body {
   cursor: pointer;
 }
 
-.wallet-connect-mobile {
+.wallet-connect-modal {
   display: flex;
   flex-direction: column;
   gap: 10px;
